@@ -1,70 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Gallery</title>
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            margin: 50px;
-            scroll-behavior: smooth;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movie Gallery</title>
+        <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin: 50px;
+      scroll-behavior: smooth;
+    }
+    #image {
+        width: 600px;
+        height: 400px;
+        border: 2px solid #333;
+        margin: 20px auto;
+        background-size: cover; /* Đảm bảo ảnh nền lấp đầy khu vực */
+        background-position: center; /* Căn giữa ảnh nền */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .thumbnail-container {
+        margin-top: 20px;
+    }
+    img {
+        width: 100px;
+        height: auto;
+        margin: 0 80px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+    img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+    </head>
 
-        #image {
-            width: 600px;
-            /* Bỏ background-image, background-size, background-position */
-            border: 2px solid #333;
-            margin: 20px auto;
-            
-            /* Căn chỉnh nội dung ban đầu */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 300px; /* Chiều cao tối thiểu cho text ban đầu */
-        }
-        
-        #image p {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 0;
-            padding: 10px;
-        }
-
-        #main-image {
-            max-width: 100%; /* Đảm bảo ảnh không vượt quá chiều rộng 600px của #image */
-            height: auto; /* Chiều cao tự động điều chỉnh theo tỷ lệ ảnh */
-            display: none; /* Ẩn ban đầu */
-        }
-        
-        .thumbnail-container img {
-            width: 100px;
-            margin: 10px; /* Đã sửa margin từ 100px về 10px cho hợp lý */
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-
-        .thumbnail-container img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Movie Gallery</h1>
-    
-    <div id="image">
-        <img id="main-image" src="" alt="">
-        <p id="default-text">Hover over an image below to display here.</p>
-    </div>
-    
-    <br>
-    
-    <div class="thumbnail-container">
+    <body>
+        <h1>Movie Gallery</h1>
+        <div id="image">
+        Hover over an image below to display here.
+        </div>
+        <br>
         <img src="interstellar.jpg" alt="Interstellar" 
              onmouseover="upDate(this)" 
              onmouseout="undo()">
@@ -74,38 +58,20 @@
         <img src="breakingbad.jpg" alt="Breaking Bad"
              onmouseover="upDate(this)" 
              onmouseout="undo()">
-    </div>
+        <script>
+            function upDate(previewPic) {
+                console.log("Hover works!");
+                console.log(previewPic.src);
+                console.log(previewPic.alt);
 
-    <script>
-        function upDate(previewPic) {
-            const mainImage = document.getElementById("main-image");
-            const defaultText = document.getElementById("default-text");
-            
-            // Ẩn text ban đầu và hiển thị ảnh
-            defaultText.style.display = 'none';
-            mainImage.style.display = 'block';
-
-            // Cập nhật thuộc tính src và alt của ảnh chính
-            mainImage.src = previewPic.src;
-            mainImage.alt = previewPic.alt;
-
-            // Đặt tiêu đề cho box chính (có thể dùng alt cho tiêu đề)
-            // document.getElementById("image").title = previewPic.alt;
+                document.getElementById("image").innerHTML = previewPic.alt;
+                document.getElementById("image").style.backgroundImage ="url('" + previewPic.src + "')";
         }
 
         function undo() {
-            const mainImage = document.getElementById("main-image");
-            const defaultText = document.getElementById("default-text");
-
-            // Xóa src và ẩn ảnh
-            mainImage.src = '';
-            mainImage.alt = '';
-            mainImage.style.display = 'none';
-
-            // Hiển thị lại text ban đầu
-            defaultText.style.display = 'block';
-            // document.getElementById("image").title = "";
+            document.getElementById("image").innerHTML ="Hover over an image below to display here.";
+            document.getElementById("image").style.backgroundImage = "url('')";
         }
-    </script>
-</body>
+        </script>
+    </body>
 </html>
