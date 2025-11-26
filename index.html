@@ -12,12 +12,14 @@
       scroll-behavior: smooth;
     }
     #image {
-        width: 600px;
-        height: 400px;
+        width: 11cm;
+        height: 16cm;
         border: 2px solid #333;
-        margin: 20px auto;
-        background-size: cover; /* Đảm bảo ảnh nền lấp đầy khu vực */
+        margin: auto;
+        background-size: contain;
+        background-repeat: no-repeat;
         background-position: center; /* Căn giữa ảnh nền */
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -25,16 +27,14 @@
         font-size: 20px;
         font-weight: bold;
     }
-    .thumbnail-container {
-        margin-top: 20px;
-    }
+    
     img {
-        width: 100px;
-        height: auto;
-        margin: 0 80px;
+        width: 200px;
+        height: fit-content;
+        margin: 0 50px;
         cursor: pointer;
         border-radius: 8px;
-        transition: 0.3s;
+        transition: 0.2s;
     }
     img:hover {
         transform: scale(1.1);
@@ -60,7 +60,6 @@
              onmouseout="undo()">
         <script>
             function upDate(previewPic) {
-                console.log("Hover works!");
                 console.log(previewPic.src);
                 console.log(previewPic.alt);
 
