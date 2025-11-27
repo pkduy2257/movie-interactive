@@ -28,14 +28,14 @@
         font-size: 20px;
         font-weight: bold;
     }
-    
-    /* Thiết lập img ban đầu (Áp dụng cải tiến Responsive cho Mobile) */
+    
+    /* Thiết lập img ban đầu (Mobile View - 1 Cột) */
     img {
-        /* Thay width cố định bằng width linh hoạt, tránh tràn màn hình */
-        width: 80%;
-        max-width: 200px; /* Giới hạn tối đa 200px */
+        /* Chiều rộng linh hoạt hơn cho Mobile */
+        width: 80%; 
+        max-width: 200px;
         height: fit-content;
-        margin: 10px 5px; /* Giảm margin ngang */
+        margin: 10px 5px; /* Điều chỉnh margin */
         cursor: pointer;
         border-radius: 8px;
         transition: 0.2s;
@@ -47,10 +47,10 @@
 
     /* Thiết lập Container cho ảnh Thumbnail (Mobile View - 1 Cột) */
     #gallery-container {
-        display: flex;
+        display: flex; /* Kích hoạt Flexbox */
         flex-direction: row;
-        flex-wrap: wrap; 
-        justify-content: center; 
+        flex-wrap: wrap; /* Cho phép các mục xuống dòng */
+        justify-content: center; /* Căn giữa các ảnh */
         margin-top: 20px;
     }
 
@@ -58,7 +58,7 @@
 /* --- Query #1: Tablet View (min-width: 772px) - 2 Cột --- */
 /* ---------------------------------------------------------------------- */
 @media (min-width: 772px) {
-    /* Thay đổi #image (div) thành 45% viewport width */
+    /* #image (div) 45% viewport width */
     #image {
         width: 45vw;
         margin: 0 auto;
@@ -68,14 +68,14 @@
         justify-content: center;
     }
 
-    /* Thay đổi ảnh thumbnail: max-height 30vh và bố cục 2 cột */
+    /* Ảnh thumbnail: max-height 30vh và bố cục 2 cột */
     #gallery-container img {
         max-height: 30vh;
         height: auto; 
-        /* Đặt width khoảng 45% để 2 ảnh vừa vặn trên 1 hàng (2 cột) */
+        /* Bố cục 2 cột */
         width: 45%; 
-        margin: 10px 0; 
-        max-width: none; /* Loại bỏ giới hạn max-width 200px khi ở tablet view */
+        margin: 10px 0;
+        max-width: none; /* Loại bỏ giới hạn max-width 200px */
     }
 }
 
@@ -83,14 +83,14 @@
 /* --- Query #2: Large Screen View (min-width: 998px) - 3 Cột --- */
 /* ---------------------------------------------------------------------- */
 @media (min-width: 998px) {
-    /* Thay đổi #image (div) thành 30% viewport width */
+    /* #image (div) 30% viewport width */
     #image {
         width: 30vw;
     }
 
-    /* Thay đổi ảnh thumbnail: bố cục 3 cột */
+    /* Ảnh thumbnail: bố cục 3 cột */
     #gallery-container img {
-        /* Đặt width khoảng 30% để 3 ảnh vừa vặn trên 1 hàng (3 cột) */
+        /* Bố cục 3 cột */
         width: 30%;
         margin: 10px 0.5%; 
     }
@@ -99,34 +99,37 @@
     </head>
 
     <body>
-        <h1>Movie Gallery</h1>
-        <div id="image">
-        Hover over an image below to display here.
-        </div>
-        <br>
-        <img src="interstellar.jpg" alt="Interstellar" 
-             onmouseover="upDate(this)" 
-             onmouseout="undo()">
-        <img src="peaky.jpg" alt="Peaky Blinders"
-             onmouseover="upDate(this)" 
-             onmouseout="undo()">
-        <img src="breakingbad.jpg" alt="Breaking Bad"
-             onmouseover="upDate(this)" 
-             onmouseout="undo()">
-        <script>
-            function upDate(previewPic) {
-                console.log(previewPic.src);
-                console.log(previewPic.alt);
+        <h1>Movie Gallery</h1>
+        <div id="image">
+        Hover over an image below to display here.
+        </div>
+        <br>
+        
+                <div id="gallery-container">
+            <img src="interstellar.jpg" alt="Interstellar" 
+                    onmouseover="upDate(this)" 
+                    onmouseout="undo()">
+            <img src="peaky.jpg" alt="Peaky Blinders"
+                    onmouseover="upDate(this)" 
+                    onmouseout="undo()">
+            <img src="breakingbad.jpg" alt="Breaking Bad"
+                    onmouseover="upDate(this)" 
+                    onmouseout="undo()">
+        </div>
 
-                document.getElementById("image").innerHTML = previewPic.alt;
-                document.getElementById("image").style.backgroundImage ="url('" + previewPic.src + "')";
-        }
+        <script>
+            function upDate(previewPic) {
+                console.log(previewPic.src);
+                console.log(previewPic.alt);
 
-        function undo() {
-            document.getElementById("image").innerHTML ="Hover over an image below to display here.";
-            document.getElementById("image").style.backgroundImage = "url('')";
-        }
-        </script>
-    </body>
+                document.getElementById("image").innerHTML = previewPic.alt;
+                document.getElementById("image").style.backgroundImage ="url('" + previewPic.src + "')";
+        }
+
+        function undo() {
+            document.getElementById("image").innerHTML ="Hover over an image below to display here.";
+            document.getElementById("image").style.backgroundImage = "url('')";
+        }
+        </script>
+    </body>
 </html>
-
