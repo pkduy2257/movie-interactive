@@ -1,76 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Movie Gallery</title>
-        <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      margin: 50px;
-      scroll-behavior: smooth;
-    }
+<style>
+/* ... (Mã CSS gốc không thay đổi) ... */
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin: 50px;
+      scroll-behavior: smooth;
+    }
+    #image {
+        width: 11cm;
+        height: 16cm;
+        border: 2px solid #333;
+        margin: auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center; /* Căn giữa ảnh nền */
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    img {
+        width: 200px;
+        height: fit-content;
+        margin: 0 50px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.2s;
+    }
+    img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+/* ---------------------------------------------------------------------- */
+/* --- Query #1: Tablet View (min-width: 772px) --- */
+/* ---------------------------------------------------------------------- */
+@media (min-width: 772px) {
+    /* Thay đổi bố cục cho #image: 45% chiều rộng viewport */
     #image {
-        width: 11cm;
-        height: 16cm;
-        border: 2px solid #333;
-        margin: auto;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center; /* Căn giữa ảnh nền */
-        position: relative;
+        /* Ghi đè chiều rộng cố định (11cm) bằng chiều rộng linh hoạt (45vw) */
+        width: 45vw;
+        /* Ghi đè margin: auto để căn giữa với chiều rộng phần trăm */
+        margin: 0 auto;
+        /* Thêm display: block để đảm bảo width: 45vw hoạt động tốt */
+        display: block; 
+        /* Cần thiết lập lại các thuộc tính flex nếu bạn muốn nó tiếp tục hoạt động */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
-        font-weight: bold;
     }
-    
+
+    /* Thay đổi kích thước ảnh thu nhỏ: 30% chiều cao viewport */
     img {
-        width: 200px;
-        height: fit-content;
-        margin: 0 50px;
-        cursor: pointer;
-        border-radius: 8px;
-        transition: 0.2s;
+        /* vh = viewport height. max-height đảm bảo ảnh không vượt quá kích thước này */
+        max-height: 30vh;
+        /* Thiết lập lại width để nó tự động theo tỷ lệ */
+        width: auto; 
     }
-    img:hover {
-        transform: scale(1.1);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Query #2: Large Screen View (min-width: 998px) --- */
+/* ---------------------------------------------------------------------- */
+@media (min-width: 998px) {
+    /* Thay đổi bố cục cho #image: 30% chiều rộng viewport. */
+    /* Các thuộc tính khác (margin, display, v.v.) sẽ kế thừa từ Media Query #1 */
+    #image {
+        width: 30vw;
     }
-  </style>
-    </head>
-
-    <body>
-        <h1>Movie Gallery</h1>
-        <div id="image">
-        Hover over an image below to display here.
-        </div>
-        <br>
-        <img src="interstellar.jpg" alt="Interstellar" 
-             onmouseover="upDate(this)" 
-             onmouseout="undo()">
-        <img src="peaky.jpg" alt="Peaky Blinders"
-             onmouseover="upDate(this)" 
-             onmouseout="undo()">
-        <img src="breakingbad.jpg" alt="Breaking Bad"
-             onmouseover="upDate(this)" 
-             onmouseout="undo()">
-        <script>
-            function upDate(previewPic) {
-                console.log(previewPic.src);
-                console.log(previewPic.alt);
-
-                document.getElementById("image").innerHTML = previewPic.alt;
-                document.getElementById("image").style.backgroundImage ="url('" + previewPic.src + "')";
-        }
-
-        function undo() {
-            document.getElementById("image").innerHTML ="Hover over an image below to display here.";
-            document.getElementById("image").style.backgroundImage = "url('')";
-        }
-        </script>
-    </body>
-</html>
+}
+</style>
