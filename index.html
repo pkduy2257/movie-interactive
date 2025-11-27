@@ -99,37 +99,34 @@
     </head>
 
     <body>
-        <h1>Movie Gallery</h1>
-        <div id="image">
-        Hover over an image below to display here.
-        </div>
-        <br>
-        
-        <div id="gallery-container">
-            <img src="https://via.placeholder.com/150/FF0000/FFFFFF?text=Interstellar" alt="Interstellar" 
-                    onmouseover="upDate(this)" 
-                    onmouseout="undo()">
-            <img src="https://via.placeholder.com/150/0000FF/FFFFFF?text=Peaky+Blinders" alt="Peaky Blinders"
-                    onmouseover="upDate(this)" 
-                    onmouseout="undo()">
-            <img src="https://via.placeholder.com/150/00FF00/000000?text=Breaking+Bad" alt="Breaking Bad"
-                    onmouseover="upDate(this)" 
-                    onmouseout="undo()">
-        </div>
+        <h1>Movie Gallery</h1>
+        <div id="image">
+        Hover over an image below to display here.
+        </div>
+        <br>
+        <img src="interstellar.jpg" alt="Interstellar" 
+             onmouseover="upDate(this)" 
+             onmouseout="undo()">
+        <img src="peaky.jpg" alt="Peaky Blinders"
+             onmouseover="upDate(this)" 
+             onmouseout="undo()">
+        <img src="breakingbad.jpg" alt="Breaking Bad"
+             onmouseover="upDate(this)" 
+             onmouseout="undo()">
+        <script>
+            function upDate(previewPic) {
+                console.log(previewPic.src);
+                console.log(previewPic.alt);
 
-        <script>
-            function upDate(previewPic) {
-                console.log(previewPic.src);
-                console.log(previewPic.alt);
+                document.getElementById("image").innerHTML = previewPic.alt;
+                document.getElementById("image").style.backgroundImage ="url('" + previewPic.src + "')";
+        }
 
-                document.getElementById("image").innerHTML = previewPic.alt;
-                document.getElementById("image").style.backgroundImage ="url('" + previewPic.src + "')";
-        }
-
-        function undo() {
-            document.getElementById("image").innerHTML ="Hover over an image below to display here.";
-            document.getElementById("image").style.backgroundImage = "url('')";
-        }
-        </script>
-    </body>
+        function undo() {
+            document.getElementById("image").innerHTML ="Hover over an image below to display here.";
+            document.getElementById("image").style.backgroundImage = "url('')";
+        }
+        </script>
+    </body>
 </html>
+
