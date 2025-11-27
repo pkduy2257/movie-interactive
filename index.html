@@ -1,11 +1,17 @@
-<style>
-/* ... (Mã CSS gốc không thay đổi) ... */
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movie Gallery</title>
+        <style>
     body {
       font-family: Arial;
       text-align: center;
       margin: 50px;
       scroll-behavior: smooth;
     }
+    /* Thiết lập #image ban đầu */
     #image {
         width: 11cm;
         height: 16cm;
@@ -13,7 +19,7 @@
         margin: auto;
         background-size: contain;
         background-repeat: no-repeat;
-        background-position: center; /* Căn giữa ảnh nền */
+        background-position: center;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -23,8 +29,9 @@
         font-weight: bold;
     }
     
+    /* Thiết lập img ban đầu (áp dụng cho Mobile View) */
     img {
-        width: 200px;
+        width: 200px; /* Chiều rộng cố định cho mobile/1 cột */
         height: fit-content;
         margin: 0 50px;
         cursor: pointer;
@@ -36,42 +43,90 @@
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
+    /* Thiết lập Container cho ảnh Thumbnail (Mobile View - 1 Cột) */
+    #gallery-container {
+        display: flex; /* Kích hoạt Flexbox */
+        flex-direction: row;
+        flex-wrap: wrap; /* Cho phép các mục xuống dòng */
+        justify-content: center; /* Căn giữa các ảnh */
+        margin-top: 20px;
+    }
+
 /* ---------------------------------------------------------------------- */
-/* --- Query #1: Tablet View (min-width: 772px) --- */
+/* --- Query #1: Tablet View (min-width: 772px) - 2 Cột --- */
 /* ---------------------------------------------------------------------- */
 @media (min-width: 772px) {
-    /* Thay đổi bố cục cho #image: 45% chiều rộng viewport */
+    /* Thay đổi #image (div) thành 45% viewport width */
     #image {
-        /* Ghi đè chiều rộng cố định (11cm) bằng chiều rộng linh hoạt (45vw) */
         width: 45vw;
-        /* Ghi đè margin: auto để căn giữa với chiều rộng phần trăm */
         margin: 0 auto;
-        /* Thêm display: block để đảm bảo width: 45vw hoạt động tốt */
-        display: block; 
-        /* Cần thiết lập lại các thuộc tính flex nếu bạn muốn nó tiếp tục hoạt động */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
-    /* Thay đổi kích thước ảnh thu nhỏ: 30% chiều cao viewport */
-    img {
-        /* vh = viewport height. max-height đảm bảo ảnh không vượt quá kích thước này */
+    /* Thay đổi ảnh thumbnail: max-height 30vh và bố cục 2 cột */
+    #gallery-container img {
         max-height: 30vh;
-        /* Thiết lập lại width để nó tự động theo tỷ lệ */
-        width: auto; 
+        height: auto; 
+        /* Đặt width khoảng 45% để 2 ảnh vừa vặn trên 1 hàng (2 cột) */
+        width: 45%; 
+        margin: 10px 0; /* Điều chỉnh margin */
     }
 }
 
 /* ---------------------------------------------------------------------- */
-/* --- Query #2: Large Screen View (min-width: 998px) --- */
+/* --- Query #2: Large Screen View (min-width: 998px) - 3 Cột --- */
 /* ---------------------------------------------------------------------- */
 @media (min-width: 998px) {
-    /* Thay đổi bố cục cho #image: 30% chiều rộng viewport. */
-    /* Các thuộc tính khác (margin, display, v.v.) sẽ kế thừa từ Media Query #1 */
+    /* Thay đổi #image (div) thành 30% viewport width */
     #image {
         width: 30vw;
     }
+
+    /* Thay đổi ảnh thumbnail: bố cục 3 cột */
+    #gallery-container img {
+        /* Đặt width khoảng 30% để 3 ảnh vừa vặn trên 1 hàng (3 cột) */
+        width: 30%;
+        margin: 10px 0.5%; /* Điều chỉnh margin để tạo khoảng cách nhỏ hơn */
+    }
 }
-</style>
+  </style>
+    </head>
+
+    <body>
+        <h1>Movie Gallery</h1>
+        <div id="image">
+        Hover over an image below to display here.
+        </div>
+        <br>
+        
+        <div id="gallery-container">
+            <img src="interstellar.jpg" alt="Interstellar" 
+                    onmouseover="upDate(this)" 
+                    onmouseout="undo()">
+            <img src="peaky.jpg" alt="Peaky Blinders"
+                    onmouseover="upDate(this)" 
+                    onmouseout="undo()">
+            <img src="breakingbad.jpg" alt="Breaking Bad"
+                    onmouseover="upDate(this)" 
+                    onmouseout="undo()">
+        </div>
+
+        <script>
+            function upDate(previewPic) {
+                console.log(previewPic.src);
+                console.log(previewPic.alt);
+
+                document.getElementById("image").innerHTML = previewPic.alt;
+                document.getElementById("image").style.backgroundImage ="url('" + previewPic.src + "')";
+        }
+
+        function undo() {
+            document.getElementById("image").innerHTML ="Hover over an image below to display here.";
+            document.getElementById("image").style.backgroundImage = "url('')";
+        }
+        </script>
+    </body>
+</html>
