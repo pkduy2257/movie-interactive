@@ -3,22 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie Gallery</title>
+<title>Movie Gallery Portfolio</title>
 
 <style>
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     text-align: center;
     margin: 50px;
     scroll-behavior: smooth;
+    color: #333;
+    background-color: #ffffff;
 }
+
+/* ------------------------------------- */
+/* 1. Styling for the About Section */
+/* ------------------------------------- */
+#about {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 3px solid #f9f9ab;
+    border-radius: 10px;
+    text-align: left;
+    background-color: #fef4dd;
+    
+}
+
+#about h2 {
+    text-align: center;
+    color: #479aff;
+    margin-bottom: 20px;
+    animation: rainbowHue 36s linear infinite;
+}
+
+.profile-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+    flex-shrink: 0;
+}
+
+.bio p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.skills h3 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    color: #4e8cff;
+    animation: rainbowHue 36s linear infinite;
+}
+
+.skills ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    animation: rainbowHue 1.5s linear infinite;
+}
+
+.skills ul li {
+    background-color: #e9f5ff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    border: 1px solid #007bff;
+}
+
+/* ------------------------------------- */
+/* 2. Styling for the Movie Gallery */
+/* ------------------------------------- */
 
 /* Khung hiển thị ảnh lớn (#image) */
 #image {
     width: 12rem;
     height: 18rem; /* Tỉ lệ 2:3 */
     border: 2px solid #333;
-    margin: auto;
+    margin: 30px auto 20px auto; /* Điều chỉnh margin trên/dưới */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -28,6 +101,7 @@ body {
     font-size: 1rem;
     font-weight: bold;
     transition: background-image 0.3s ease;
+    
 }
 
 /* Container chứa các thumbnail */
@@ -38,17 +112,21 @@ body {
     margin: 20px auto 0 auto;
     gap: 10px;
     max-width: 1100px;
+    
+    
 }
 
 /* Thumbnail ảnh (Mobile - 1 cột) */
 #gallery-container img {
-    width: 80%; 
-    max-width: 200px; 
-    height: calc(80% * 1.5); /* giữ tỉ lệ 2:3 */
+    width: 80%;
+    max-width: 200px;
+    /* height được tính bằng JS hoặc để object-fit tự điều chỉnh */
+    height: 300px; /* Cố định chiều cao để giữ tỉ lệ 2:3 dễ hơn khi object-fit */
     object-fit: cover;
     cursor: pointer;
     border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    
+    transition: transform 0.3s ease, box-shadow 0.5s ease, filter 0.5s ease;
 }
 
 #gallery-container img:hover {
@@ -56,8 +134,25 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
+@keyframes rainbowHue {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+
+/* ------------------------------------- */
+/* 3. Media Queries (Responsive Design) */
+/* ------------------------------------- */
+
 /* Tablet - 2 cột */
 @media (min-width: 772px) {
+    /* About Section */
+    .profile-content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    /* Gallery */
     #image {
         width: 18rem;
         height: 27rem;
@@ -65,13 +160,15 @@ body {
 
     #gallery-container img {
         width: calc(50% - 15px);
-        height: calc((50% - 15px) * 1.5); /* 2:3 */
+        height: calc((50vw - 40px) * 1.5); /* Chiều cao tương ứng với chiều rộng 50% màn hình */
         max-width: 250px;
+        height: 375px; /* Tỉ lệ 250x375 */
     }
 }
 
 /* Desktop - 3 cột */
 @media (min-width: 998px) {
+    /* Gallery */
     #image {
         width: 20rem;
         height: 30rem;
@@ -79,15 +176,50 @@ body {
 
     #gallery-container img {
         width: calc(33.333% - 13px);
-        height: calc((33.333% - 13px) * 1.5); /* 2:3 */
         max-width: 300px;
+        height: 450px; /* Tỉ lệ 300x450 */
+    }
+}
+
+/* Responsive cho About trên Mobile */
+@media (max-width: 772px) {
+    .profile-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .bio {
+        text-align: left;
     }
 }
 </style>
 </head>
 
 <body>
-<h1>Movie Gallery</h1>
+
+<section id="about">
+    <h2>About Me</h2>
+    <div class="profile-content">
+        
+        <div class="bio">
+            <p><strong>Hi, I'm Duy</strong>, a passionate Web Developer with a focus on creating responsive and intuitive user interfaces. I specialize in HTML, CSS, and JavaScript.</p>
+            
+            <p>I am looking for opportunities in Front-End Development where I can apply my skills and continue learning.</p>
+        </div>
+    </div>
+    <div class="skills">
+        <h3>Key Skills</h3>
+        <ul>
+            <li>HTML5, CSS3, JavaScript (ES6+)</li>
+            <li>Responsive Design (Media Queries, Flexbox, Grid)</li>
+            <li>DOM Manipulation & Event Handling</li>
+            <li>Version Control (Git/GitHub)</li>
+            <li>UI/UX Principles</li>
+        </ul>
+    </div>
+</section>
+
+<hr> <h1 id="gallery-title">Movie Gallery</h1>
 
 <div id="image">
     Hover over an image below to display here.
