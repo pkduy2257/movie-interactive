@@ -134,6 +134,32 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
+/* Styling for the Navigation Bar */
+#navbar {
+    position: sticky; /* Giữ thanh nav ở trên cùng khi cuộn */
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Đảm bảo thanh nav nằm trên các nội dung khác */
+}
+
+#navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+#navbar a:hover {
+    background-color: #007bff;
+}
+
 @keyframes rainbowHue {
   0% { filter: hue-rotate(0deg); }
   100% { filter: hue-rotate(360deg); }
@@ -196,6 +222,10 @@ body {
 </head>
 
 <body>
+<nav id="navbar">
+    <a href="#about">About</a>
+    <a href="#gallery-title">Gallery</a>
+</nav>
 
 <section id="about">
     <h2>About Me</h2>
